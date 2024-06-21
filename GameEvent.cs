@@ -1,3 +1,5 @@
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
 public class GameEvent
 {
     public string Message { get; set; }

@@ -1,3 +1,6 @@
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
+
 using System;
 
 // Abstract factory class for creating different types of cards

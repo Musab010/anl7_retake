@@ -1,3 +1,5 @@
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
 // Abstract base class for all types of cards
 public abstract class Card
 {

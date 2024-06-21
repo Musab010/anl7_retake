@@ -1,3 +1,5 @@
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
 public class Player : IObserver<GameEvent>
 {
     public string Name { get; private set; }

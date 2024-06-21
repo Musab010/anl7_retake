@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
 public class EventManager
 {
     private readonly List<IObserver<GameEvent>> _observers = new List<IObserver<GameEvent>>();

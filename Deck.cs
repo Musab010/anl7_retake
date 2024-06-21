@@ -1,3 +1,6 @@
+// Musab Sivrikaya (0988932)
+// Ozeir Moradi (0954800)
+
 public class Deck
 {
     private List<Card> _cards = new List<Card>();
