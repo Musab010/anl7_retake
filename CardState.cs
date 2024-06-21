@@ -1,4 +1,3 @@
-// State pattern
 public interface ICardState
 {
     void Handle(Card card);
@@ -10,10 +9,9 @@ public class InHandState : ICardState
     {
         Console.WriteLine($"{card.Name} is in hand.");
     }
-
     public void Play(Card card)
     {
-        card.State = new OnBattlefieldState();
+        card.SetState(new OnBattlefieldState());
         card.State.Handle(card);
     }
 }
@@ -24,10 +22,9 @@ public class OnBattlefieldState : ICardState
     {
         Console.WriteLine($"{card.Name} is on the battlefield.");
     }
-
     public void Attack(Card card)
     {
-        card.State = new AttackingState();
+        card.SetState(new AttackingState());
         card.State.Handle(card);
     }
 }
@@ -38,13 +35,10 @@ internal class AttackingState : ICardState
     {
         Console.WriteLine($"{card.Name} is attacking.");
     }
-
     public void Attack(Card card)
     {
-        card.State = new AttackingState();
-        card.State.Handle(card);
+        Console.WriteLine($"{card.Name} continues to attack.");
     }
-
 }
 
 public class DiscardedState : ICardState
@@ -56,7 +50,7 @@ public class DiscardedState : ICardState
 
     public void Discard(Card card)
     {
-        card.State = new DiscardedState();
+        card.SetState(new DiscardedState());
         card.State.Handle(card);
     }
 }

@@ -1,6 +1,8 @@
+using System;
+using System.Collections.Generic;
+
 public class EventManager
 {
-    // Observer pattern
     private readonly List<IObserver<GameEvent>> _observers = new List<IObserver<GameEvent>>();
 
     public IDisposable Subscribe(IObserver<GameEvent> observer)
@@ -9,13 +11,14 @@ public class EventManager
         {
             _observers.Add(observer);
         }
+
         return new Unsubscriber(_observers, observer);
     }
 
     private class Unsubscriber : IDisposable
     {
-        private List<IObserver<GameEvent>> _observers;
-        private IObserver<GameEvent> _observer;
+        private readonly List<IObserver<GameEvent>> _observers;
+        private readonly IObserver<GameEvent> _observer;
 
         public Unsubscriber(List<IObserver<GameEvent>> observers, IObserver<GameEvent> observer)
         {

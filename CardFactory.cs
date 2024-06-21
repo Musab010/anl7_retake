@@ -1,20 +1,21 @@
 using System;
-// Factory Method Pattern
+
+// Abstract factory class for creating different types of cards
 public abstract class CardFactory
 {
     public abstract Card CreateCard(string type);
 }
-
 public class SimpleCardFactory : CardFactory
 {
+    // Override the CreateCard method to produce specific card instances based on the type
     public override Card CreateCard(string type)
     {
         return type switch
         {
-            "Creature" => new CreatureCard("Dragon", 5, 5), 
-            "Land" => new LandCard("Mountain"), 
-            "Spell" => new SpellCard("Fireball", "Deal 3 damage"), 
-            "Artifact" => new ArtifactCard("Ancient Machine", "Effect Description Here"), // Voeg artifact creatie toe
+            "Creature" => new CreatureCard("Griffin", 4, 4),
+            "Land" => new LandCard("Forest"),
+            "Spell" => new SpellCard("Lightning Bolt", "Deal 4 damage"),
+            "Artifact" => new ArtifactCard("Ancient Machine", "Skip drawing phase"),
             _ => throw new ArgumentException($"Invalid card type: {type}"),
         };
     }

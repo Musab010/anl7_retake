@@ -1,18 +1,24 @@
-﻿class Program
+﻿using System;
+
+class Program
 {
     static void Main(string[] args)
     {
+        // Maak een nieuw spel aan
         Game game = new();
+
+        // Voeg spelers toe aan het spel
         game.AddPlayer("Musab");
         game.AddPlayer("Ozeir");
 
+        // Start het spel en informeer de spelers
         var gameStartEvent = new GameEvent("The game has started!");
         game.EventManager.NotifyObservers(gameStartEvent);
 
-        // Initialiseer de spelstaat voor turn 2
+        // Initialiseer de spelstaat voor beurt 2
         game.InitializeStateForTurn2();
 
-        // Simuleer turn 2
+        // Simuleer beurt 2
         game.SimulateTurn2();
     }
 }

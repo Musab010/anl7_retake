@@ -6,7 +6,7 @@ public class Player : IObserver<GameEvent>
     public int Lives { get; set; }
     public bool HalveDamage { get; set; } = false;
     public bool SkipNextDrawingPhase { get; set; } = false;
-    public Deck Deck { get; private set; } // Verplaats Deck naar de Player class
+    public Deck Deck { get; private set; }
     private Game _game;
 
     public void OnNext(GameEvent value)
@@ -16,20 +16,19 @@ public class Player : IObserver<GameEvent>
 
     public void OnError(Exception error)
     {
-        
+        Console.WriteLine($"{Name} received an error: {error.Message}");
     }
 
     public void OnCompleted()
     {
-    
+        Console.WriteLine($"{Name} has completed receiving events.");
     }
 
-    // Verander de constructor om het Deck object correct te initialiseren
     public Player(string name, Game game)
     {
         Name = name;
         _game = game;
-        Deck = new Deck(); // Initialiseer het Deck hier
+        Deck = new Deck();
         Lives = 10;
     }
 
@@ -42,11 +41,11 @@ public class Player : IObserver<GameEvent>
             return;
         }
 
-        var drawnCard = Deck.Draw(); // Gebruik het deck van de speler
+        var drawnCard = Deck.Draw();
         if (drawnCard != null)
         {
             Hand.Add(drawnCard);
-            Console.WriteLine($"{Name} drew {drawnCard.Name}.");
+            Console.WriteLine($"[{Name}] drew {drawnCard.Name}.");
             var gameEvent = new GameEvent($"{Name} drew a card.");
             _game.EventManager.NotifyObservers(gameEvent);
         }
@@ -63,7 +62,7 @@ public class Player : IObserver<GameEvent>
         {
             cardToPlay.Play();
             Hand.Remove(cardToPlay);
-            Console.WriteLine($"{Name} played {cardName}.");
+            Console.WriteLine($"[{Name}] played {cardName}.");
             var gameEvent = new GameEvent($"{Name} has played {cardName}.");
             _game.EventManager.NotifyObservers(gameEvent);
 
@@ -74,7 +73,7 @@ public class Player : IObserver<GameEvent>
         }
         else
         {
-            Console.WriteLine($"{Name} does not have {cardName} in hand.");
+            Console.WriteLine($"[{Name}] does not have {cardName} in hand.");
         }
     }
 
@@ -82,6 +81,6 @@ public class Player : IObserver<GameEvent>
     {
         Hand.Remove(card);
         DiscardPile.Add(card);
-        Console.WriteLine($"{Name} discarded {card.Name}.");
+        Console.WriteLine($"[{Name}] discarded {card.Name}.");
     }
 }

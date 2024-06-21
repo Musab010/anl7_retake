@@ -16,10 +16,18 @@ public class Game
         EventManager.Subscribe(player);
     }
 
-    // Stap 2: Initialiseer de Huidige Spelstaat voor Turn 2
+    // Methode om een header te printen
+    private void PrintHeader(string title)
+    {
+        Console.WriteLine("\n" + new string('=', 40));
+        Console.WriteLine($"= {title}");
+        Console.WriteLine(new string('=', 40) + "\n");
+    }
+
+    // Initialiseer de Huidige Spelstaat voor Turn 2
     public void InitializeStateForTurn2()
     {
-        Console.WriteLine("Initializing game state for turn 2...");
+        PrintHeader("Initializing game state for turn 2...");
 
         foreach (var player in Players)
         {
@@ -27,38 +35,32 @@ public class Game
 
             // Stel de handen van de spelers in met enkele kaarten
             player.Hand.Clear();
-            player.Hand.Add(new CreatureCard("Dragon", 5, 5));
-            player.Hand.Add(new SpellCard("Fireball", "Deal 3 damage"));
+            player.Hand.Add(new CreatureCard("Griffin", 4, 4));
+            player.Hand.Add(new SpellCard("Lightning Bolt", "Deal 4 damage"));
             player.Hand.Add(new ArtifactCard("Ancient Machine", "Opponent's creatures deal half damage"));
-            player.Hand.Add(new LandCard("Mountain"));
-            player.Hand.Add(new CreatureCard("Dragon", 5, 5));
+            player.Hand.Add(new LandCard("Forest"));
+            player.Hand.Add(new CreatureCard("Griffin", 4, 4));
             player.Hand.Add(new ArtifactCard("Ancient Machine", "All creatures can't defend"));
-            player.Hand.Add(new LandCard("Mountain"));
+            player.Hand.Add(new LandCard("Forest"));
 
             // Toon de startcondities
             Console.WriteLine($"{player.Name} has {player.Hand.Count} cards in hand and {player.Lives} lives.");
             Console.WriteLine($"{player.Name}'s discard pile has {player.DiscardPile.Count} cards.");
         }
 
-        // Stel enkele kaarten in het spel in
-        Console.WriteLine("Setting up initial cards on the battlefield...");
-
-        // Voor demonstratie: voeg enkele kaarten toe aan het spel (niet per se nodig)
-        // Hier kunnen kaarten zijn die zijn gespeeld in beurt 1
+        Console.WriteLine("\nSetting up initial cards on the battlefield...");
 
         EventManager.NotifyObservers(new GameEvent("State initialized for turn 2."));
     }
 
-    // Stap 3: Simuleer Beurt 2
+    // Simuleer Beurt 2
     public void SimulateTurn2()
     {
-        Console.WriteLine("Simulating turn 2...");
+        PrintHeader("Simulating turn 2...");
 
         foreach (var player in Players)
         {
-            Console.WriteLine($"{player.Name}'s turn starts.");
-
-            // Speler trekt een kaart
+            Console.WriteLine($"\n{player.Name}'s turn starts.");
             player.DrawCard();
 
             // Speel de eerste kaart in de hand (voor demonstratie)
@@ -74,7 +76,7 @@ public class Game
 
     public void StartGame()
     {
-        Console.WriteLine("Game has started.");
+        PrintHeader("Game has started");
 
         foreach (var player in Players)
         {
